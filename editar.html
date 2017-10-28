@@ -257,8 +257,44 @@
         <table id="tableCTPS">
           <thead>
             <tr>
-                <th>Série</th>
+              <th>Série</th>
               <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Cadastro de Título de Eleitor</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+          <label class="label is-small">Seção</label>
+          <input type="number" class="form-control" id="secao">
+          <br />
+          <label class="label is-small">Zona</label>
+          <input type="number" class="form-control" id="zona">
+          <br />
+
+        </form>
+
+        <div id="button-adicionar-titulo" type="button" class="btn btn-primary">Adicionar Título de Eleitor</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableTitulo">
+          <thead>
+            <tr>
+              <th>Seção</th>
+              <th>Zona</th>
             </tr>
           </thead>
           <tbody></tbody>

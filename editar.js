@@ -71,19 +71,32 @@ $(document).ready(
 
                 $('#tableCertidao').append(html);
             });
-
-        $('#button-adicionar-ctps').click(
-            function () {
-                var estadoCTPS = $("#estadoCTPS option:selected").text();
-                var serieCTPS = $('#serieCTPS').val();
-
-                var html = '<tr>' +
-                    '<td>' + serieCTPS + '</td>' +
-                    '<td>' + estadoCTPS + '</td>' +
-                    + '</tr>';
-
-                $('#tableCTPS').append(html);
-            });
+            
+                    $('#button-adicionar-ctps').click(
+                        function () {
+                            var estadoCTPS = $("#estadoCTPS option:selected").text();
+                            var serieCTPS = $('#serieCTPS').val();
+            
+                            var html = '<tr>' +
+                                '<td>' + serieCTPS + '</td>' +
+                                '<td>' + estadoCTPS + '</td>' +
+                                + '</tr>';
+            
+                            $('#tableCTPS').append(html);
+                        });
+                        
+                                $('#button-adicionar-titulo').click(
+                                    function () {
+                                        var secao = $('#secao').val();
+                                        var zona = $('#zona').val();
+                        
+                                        var html = '<tr>' +
+                                            '<td>' + secao + '</td>' +
+                                            '<td>' + zona + '</td>' +
+                                            + '</tr>';
+                        
+                                        $('#tableTitulo').append(html);
+                                    });
 
     }
 );
