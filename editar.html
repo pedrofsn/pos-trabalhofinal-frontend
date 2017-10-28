@@ -18,7 +18,9 @@
 
 <body>
 
-  <center><h1>Cadastro do Indivíduo</h1></center>
+  <center>
+    <h1>Cadastro do Indivíduo</h1>
+  </center>
   <br/>
   <br/>
 
@@ -28,14 +30,53 @@
     <div class="row">
       <div class="col-sm-4">
 
-        <form name="cadastro-nome" class="form-group">
-          <label class="label is-small">Tipo do Nome</label>
-          <input type="text" class="form-control" id="tipoNome">
+        <form class="form-group">
+          <br />
+          <div class="text">
+            <label id="rotulo" class="is-small">-- Preencha os campos abaixo para visualizar o nome --</label>
+          </div>
+          <br />
           <label class="label is-small">Nome</label>
-          <input type="text" class="form-control" id="nome">
+          <input id="nome" size="30" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Sobrenome</label>
+          <input id="sobrenome" size="30" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Título</label>
+          <input id="titulo" size="15" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Sufixo</label>
+          <input id="sufixo" size="15" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Nome Preferido</label>
+          <select id="nomePreferido" class="form-control">
+            <option value="1">Nome Preferido</option>
+            <option value="2">Este não é o nome preferido</option>
+          </select>
+          <br />
+          <label class="label is-small">Uso do Nome</label>
+          <select id="usoNome" class="form-control">
+            <option value="1">Relatório (R)</option>
+            <option value="2">Nome de recém-nascido (N)</option>
+            <option value="3">Nome profissional ou comercial (C)</option>
+            <option value="4">Nome de solteiro (nascimento) (original)</option>
+            <option value="5">Nome registrado (nome legal)</option>
+            <option value="8">Outro nome (alias)</option>
+          </select>
+          <br />
+          <label class="label is-small">Indicador de uso condicional</label>
+          <select id="indicadorUsoCondicional" class="form-control">
+              <option value="1">Informação não confiável  </option>
+              <option value="2">Nome com erro de digitação </option>
+              <option value="3">Nome para não ser usado  </option>
+              <option value="4">Vínculo do nome proibido por lei  </option>
+              <option value="6">Requisito de privacidade/segurança especial  </option>
+              <option value="9">Nome temporário </option>
+          </select>
+
         </form>
 
-        <div id="button-adicionar-nome" type="button" class="btn btn-primary">Adicionar</div>
+        <div id="button-adicionar-nome" type="button" class="btn btn-primary">Adicionar Nome</div>
 
       </div>
 
@@ -43,8 +84,10 @@
         <table id="tableNome">
           <thead>
             <tr>
-              <th>Tipo do Nome</th>
               <th>Nome</th>
+              <th>Uso</th>
+              <th>Preferido</th>
+              <th>Indicador de Uso</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -66,13 +109,13 @@
 
           <label class="label is-small">Designação</label>
           <input type="text" class="form-control" id="designacao">
-
+          <br />
           <label class="label is-small">Emissor</label>
           <input type="text" class="form-control" id="emissor">
-
+          <br />
           <label class="label is-small">Data</label>
           <input type="date" class="form-control" id="data">
-
+          <br />
           <label class="label is-small">Área Geográfica</label>
           <select class="form-control" id="areaGeografica">
             <option value="1">Local</option>
