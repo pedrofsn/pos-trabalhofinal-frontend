@@ -1,6 +1,8 @@
 $(document).ready(
     function () {
 
+        var listaNomes = [];
+
         $('#nome, #sobrenome, #titulo, #sufixo').on('input',
             function (e) {
                 var rotulo = $('#nome-completo').val();
@@ -20,6 +22,11 @@ $(document).ready(
                 var nomePreferido = $("#nomePreferido option:selected").text();
                 var indicadorUsoCondicional = $("#indicadorUsoCondicional option:selected").text();
 
+                listaNomes.push({ 'usoNome': usoNome, 'nome': nome });
+                var index = listaNomes.length;
+                console.log("Adicionou o elemento " + listaNomes[listaNomes.length - 1] + " | Na posição: " + index);
+                console.log("Tamanho da lista: " + listaNomes.length);
+
                 if (nome != '' && !nome.includes('Preencha os campos abaixo')) {
 
                     var html = '<tr>' +
@@ -27,12 +34,30 @@ $(document).ready(
                         '<td>' + usoNome + '</td>' +
                         '<td>' + nomePreferido + '</td>' +
                         '<td>' + indicadorUsoCondicional + '</td>' +
+                        '<td><button type="button" id="' + index + '">teste</button></td>' +
                         + '</tr>';
 
                     $('#tableNome').append(html);
 
                 }
             });
+
+        $("#tableNome").on("click", "td button", function () {            
+            var row = $(this).attr('id');
+            var elemento = listaNomes[row]
+
+            console.log('row clicada: ' + row);
+
+            var index = listaNomes.indexOf(elemento);
+            console.log('index encontrado para remoção: ' + row);
+            if(index != -1) {
+                listaNomes.splice(index, 1);
+            }
+
+            console.log("Itens na lista (após remoção): " + listaNomes.length)
+
+            $(this).closest('tr').remove();
+        });
 
         $('#button-adicionar-identificador').click(
             function () {
