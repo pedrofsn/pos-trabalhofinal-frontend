@@ -71,32 +71,49 @@ $(document).ready(
 
                 $('#tableCertidao').append(html);
             });
-            
-                    $('#button-adicionar-ctps').click(
-                        function () {
-                            var estadoCTPS = $("#estadoCTPS option:selected").text();
-                            var serieCTPS = $('#serieCTPS').val();
-            
-                            var html = '<tr>' +
-                                '<td>' + serieCTPS + '</td>' +
-                                '<td>' + estadoCTPS + '</td>' +
-                                + '</tr>';
-            
-                            $('#tableCTPS').append(html);
-                        });
-                        
-                                $('#button-adicionar-titulo').click(
-                                    function () {
-                                        var secao = $('#secao').val();
-                                        var zona = $('#zona').val();
-                        
-                                        var html = '<tr>' +
-                                            '<td>' + secao + '</td>' +
-                                            '<td>' + zona + '</td>' +
-                                            + '</tr>';
-                        
-                                        $('#tableTitulo').append(html);
-                                    });
+
+        $('#button-adicionar-ctps').click(
+            function () {
+                var estadoCTPS = $("#estadoCTPS option:selected").text();
+                var serieCTPS = $('#serieCTPS').val();
+
+                var html = '<tr>' +
+                    '<td>' + serieCTPS + '</td>' +
+                    '<td>' + estadoCTPS + '</td>' +
+                    + '</tr>';
+
+                $('#tableCTPS').append(html);
+            });
+
+        $('#button-adicionar-titulo').click(
+            function () {
+                var secao = $('#secao').val();
+                var zona = $('#zona').val();
+
+                var html = '<tr>' +
+                    '<td>' + secao + '</td>' +
+                    '<td>' + zona + '</td>' +
+                    + '</tr>';
+
+                $('#tableTitulo').append(html);
+            });
+
+        $('#button-adicionar-dados-demograficos').click(
+            function () {
+                var foo = $('#form-dados-demograficos').serialize();
+                console.log(foo)
+            });
+
+        $('input:radio[name=nacionalidade]').change(function () {
+            if (this.value == '1') {
+                $('#db').show()
+                $('#de').hide()
+            }
+            else if (this.value == '2') {
+                $('#db').hide()
+                $('#de').show()
+            }
+        });
 
     }
 );
