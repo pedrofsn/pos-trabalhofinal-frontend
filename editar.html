@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Cadastro de Indíviduos</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="editar.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="editar.js"></script>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <h2>Cadastro de Identificadores</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador">
+          <div class="form-group">
+            <label class="label is-small">Designação</label>
+            <input type="text" class="form-control" id="designacao">
+
+            <label class="label is-small">Emissor</label>
+            <input type="text" class="form-control" id="emissor">
+
+            <label class="label is-small">Data</label>
+            <input type="date" class="form-control" id="data">
+
+            <label class="label is-small">Área Geográfica</label>
+            <select class="form-control" id="areaGeografica">
+              <option value="1">Local</option>
+              <option value="2">Área/região/distrito</option>
+              <option value="3">Estado/província/território</option>
+              <option value="4">Nacional</option>
+            </select>
+
+          </div>
+        </form>
+
+        <div id="button-adicionar" type="button" class="btn btn-primary">Adicionar</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Designação</th>
+              <th>Emissor</th>
+              <th>Data</th>
+              <th>Área Geográfica</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
