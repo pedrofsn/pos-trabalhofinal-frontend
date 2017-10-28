@@ -1,7 +1,5 @@
 window.onload = function () {
     atualizaMunicipios();
-    //municipiosEndereco();
-    //nacionalidade();
     paises('paises');
     paises('paises-endereco');
 };
@@ -63,18 +61,4 @@ function paises(chave) {
     };
     xhttp.open("GET", "js/paises.json", true);
     xhttp.send();
-}
-
-function brasilOutro() {
-    var brasil = document.getElementById('detalhe-brasil');
-    var outro = document.getElementById('detalhe-outro');
-
-    var elemento = document.getElementById('brasil');
-    if (elemento.checked) {
-        brasil.style.display = "block";
-        outro.style.display = "none";
-    } else {
-        brasil.style.display = "none";
-        outro.style.display = "block";
-    }
 }
