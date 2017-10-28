@@ -1,6 +1,19 @@
 $(document).ready(
     function () {
-        $('#button-adicionar').click(
+        $('#button-adicionar-nome').click(
+            function () {
+                var tipoNome = $('#tipoNome').val();
+                var nome = $('#nome').val();
+
+                var html = '<tr>' +
+                '<td>' + tipoNome + '</td>' +
+                '<td>' + nome + '</td>';
+                
+                $('#tableNome').append(html);
+            });
+
+
+        $('#button-adicionar-identificador').click(
             function () {
                 var designacao = $('#designacao').val();
                 var emissor = $('#emissor').val();
@@ -13,7 +26,7 @@ $(document).ready(
                 '<td>' + data + '</td>' +
                 '<td>' + areaGeografica + '</td>';
                 
-                $('#table').append(html);
+                $('#tableIdentificador').append(html);
             });
 
     }
