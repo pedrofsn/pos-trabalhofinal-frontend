@@ -66,12 +66,12 @@
           <br />
           <label class="label is-small">Indicador de uso condicional</label>
           <select id="indicadorUsoCondicional" class="form-control">
-              <option value="1">Informação não confiável  </option>
-              <option value="2">Nome com erro de digitação </option>
-              <option value="3">Nome para não ser usado  </option>
-              <option value="4">Vínculo do nome proibido por lei  </option>
-              <option value="6">Requisito de privacidade/segurança especial  </option>
-              <option value="9">Nome temporário </option>
+            <option value="1">Informação não confiável </option>
+            <option value="2">Nome com erro de digitação </option>
+            <option value="3">Nome para não ser usado </option>
+            <option value="4">Vínculo do nome proibido por lei </option>
+            <option value="6">Requisito de privacidade/segurança especial </option>
+            <option value="9">Nome temporário </option>
           </select>
 
         </form>
@@ -107,6 +107,15 @@
       <div class="col-sm-4">
         <form name="cadastro-identificador" class="form-group">
 
+          <label class="label is-small">Tipo do identificador</label>
+          <select class="form-control" id="tipoIdentificador">
+            <option value="01">Único dentro da organização</option>
+            <option value="02">Número do prontuário</option>
+            <option value="21">Radiologia</option>
+            <option value="22">Patologia</option>
+            <option value="23">Farmácia</option>
+          </select>
+          <br />
           <label class="label is-small">Designação</label>
           <input type="text" class="form-control" id="designacao">
           <br />
@@ -134,7 +143,8 @@
         <table id="tableIdentificador">
           <thead>
             <tr>
-              <th>Designação</th>
+                <th>Tipo</th>
+                <th>Designação</th>
               <th>Emissor</th>
               <th>Data</th>
               <th>Área Geográfica</th>
