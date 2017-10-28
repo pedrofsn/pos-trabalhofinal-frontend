@@ -205,6 +205,68 @@
     </div>
   </div>
 
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Cadastro de Carteira de Trabalho</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+
+          <label class="label is-small">Série</label>
+          <input type="number" class="form-control" id="serieCTPS">
+          <br />
+          <label class="label is-small">Estado</label>
+          <select class="form-control" id="estadoCTPS">
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AM">Amazonas</option>
+            <option value="AP">Amapá</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="PR">Paraná</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SE">Sergipe</option>
+            <option value="SP">São Paulo</option>
+            <option value="TO">Tocantins</option>
+          </select>
+
+        </form>
+
+        <div id="button-adicionar-ctps" type="button" class="btn btn-primary">Adicionar Carteira de Trabalho</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableCTPS">
+          <thead>
+            <tr>
+                <th>Série</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
