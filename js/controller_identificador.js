@@ -12,7 +12,13 @@ $(document).ready(
         // Atualizo a view
         function atualizarLista() {
             $('#tableIdentificador tbody').empty();
-            $('#form-cadastro-identificador').trigger("reset");
+
+            // Limpando form
+            $("#designacao").val("");
+            $("#emissor").val("");
+            $("#data").val("");
+            $("#tipoIdentificador").val("01");
+            $("#areaGeografica").val("1");
 
             var individuo = getIndividuoParaEdicao()
             if (individuo != null) {
@@ -35,15 +41,13 @@ $(document).ready(
                         '<td>' + data + '</td>' +
                         '<td>' + areaGeografica + '</td>' +
                         '<td><button type="button" id="editar' + id + '">Editar</button></td>' +
-                        '<td><button type="button" id="remover' + id + '">Remover</button></td>'+
+                        '<td><button type="button" id="remover' + id + '">Remover</button></td>' +
                         '</tr>';
 
-                        console.log(html)
+                    console.log(html)
 
-                    $('#tableidentificador').append(html);
+                    $('#tableIdentificador').append(html);
                 }
-
-                $('#form-cadastro-identificador').trigger("reset");
             }
         }
 
@@ -55,48 +59,53 @@ $(document).ready(
                 var data = $("#data").val();
                 var areaGeografica = $("#areaGeografica option:selected").text();
 
+                var idTipoIdentificador = $("#tipoIdentificador").val();
+                var idAreaGeografica = $("#areaGeografica").val();
+
                 var individuo = getIndividuoParaEdicao()
                 var listaIdentificadores = individuo.listaIdentificadores
 
                 var index = listaIdentificadores.length;
                 var isModoEdicao = idIdentificadorEmEdicao != -1;
-                               
+
                 if (!isModoEdicao) {
                     idIdentificadorEmEdicao = index + 1
                 }
-                    var json = {
-                        'id': idIdentificadorEmEdicao,
-                        'tipoIdentificador': tipoIdentificador,
-                        'designacao': designacao,
-                        'emissor': emissor,
-                        'data': data,
-                        'areaGeografica': areaGeografica    
-                    }
-                    
-                    if (isModoEdicao) {
-                        var indexParaRemocao = -1
-                        for (i = 0; i < listaIdentificadores.length; i++) {
-                            var objeto = listaIdentificadores[i]
+                var json = {
+                    'id': idIdentificadorEmEdicao,
+                    'tipoIdentificador': tipoIdentificador,
+                    'designacao': designacao,
+                    'emissor': emissor,
+                    'data': data,
+                    'areaGeografica': areaGeografica,
+                    'idTipoIdentificador': idTipoIdentificador,
+                    'idAreaGeografica': idAreaGeografica
+                }
 
-                            if (objeto.id == idIdentificadorEmEdicao) {
-                                indexParaRemocao = i
-                                break
-                            }
+                if (isModoEdicao) {
+                    var indexParaRemocao = -1
+                    for (i = 0; i < listaIdentificadores.length; i++) {
+                        var objeto = listaIdentificadores[i]
+
+                        if (objeto.id == idIdentificadorEmEdicao) {
+                            indexParaRemocao = i
+                            break
                         }
-
-                        if (indexParaRemocao != -1) {
-                            listaIdentificadores.splice(indexParaRemocao, 1);
-                        }
-
                     }
 
-                    // Adiciono o novo objeto no array
-                    listaIdentificadores.push(json);
+                    if (indexParaRemocao != -1) {
+                        listaIdentificadores.splice(indexParaRemocao, 1);
+                    }
 
-                    atualizarLista()
+                }
 
-                    idIdentificadorEmEdicao = -1
-                
+                // Adiciono o novo objeto no array
+                listaIdentificadores.push(json);
+
+                atualizarLista()
+
+                idIdentificadorEmEdicao = -1
+
             });
 
         $("#tableIdentificador").on("click", "td button", function () {
@@ -126,7 +135,7 @@ $(document).ready(
             var isExistente = objeto != null && index > -1
 
             if (isExistente) {
-                if (isRemocao) {                   
+                if (isRemocao) {
                     // Removendo o objeto da memória
                     listaIdentificadores.splice(index, 1);
 
@@ -137,11 +146,11 @@ $(document).ready(
 
                 } else {
                     // EDITAR na view
-                    $('#tipoIdentificador').val(objeto.tipoIdentificador)
+                    $('#tipoIdentificador').val(objeto.idTipoIdentificador)
                     $('#designacao').val(objeto.designacao)
                     $('#emissor').val(objeto.emissor)
                     $('#data').val(objeto.data)
-                    $('#areaGeografica').val(objeto.areaGeografica)
+                    $('#areaGeografica').val(objeto.idAreaGeografica)
 
                     // Registrando qual será o id a ser editado ao pressionar o botão salvar
                     idIdentificadorEmEdicao = objeto.id;
