@@ -1,30 +1,904 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Cadastro de Indíviduos</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  </head>
-  <body>
-    
-    <div class="jumbotron">
-	  <h1 class="display-3">Cadastro de Indivíduos</h1>
-	  <p class="lead">Esta página oferece a possibilidade de cadastro de indivíduos de estabelecimentos médicos e clínicos.</p>
-	  <hr class="my-4">
-	  <p>De forma a satisfazer a norma ABNT NBR  15985:2011 - Informática em Saúde - Identificação dos indivíduos em saúde</p>
-	  <p class="lead">
-	    <a class="btn btn-primary btn-lg" href="listar.html" role="button">Ir para o sistema</a>
-	  </p>
-	</div>
+<head>
+  <title>Cadastro de Indíviduos</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="editar.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="editar.js"></script>
+  <script src="editar_dados_demograficos.js"></script>
+</head>
+
+<body>
+
+  <center>
+    <h1>Cadastro do Indivíduo</h1>
+  </center>
+  <br/>
+  <br/>
+
+  <div class="container-fluid">
+    <h2>Nomes</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+
+        <form class="form-group" id="form-nome">
+          <br />
+          <div class="text">
+            <label id="rotulo" class="is-small">-- Preencha os campos abaixo para visualizar o nome --</label>
+          </div>
+          <br />
+          <label class="label is-small">Nome</label>
+          <input id="nome" size="30" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Sobrenome</label>
+          <input id="sobrenome" size="30" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Título</label>
+          <input id="titulo" size="15" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Sufixo</label>
+          <input id="sufixo" size="15" class="form-control" type="text">
+          <br />
+          <label class="label is-small">Nome Preferido</label>
+          <select id="nomePreferido" class="form-control">
+            <option value="1">Nome Preferido</option>
+            <option value="2">Este não é o nome preferido</option>
+          </select>
+          <br />
+          <label class="label is-small">Uso do Nome</label>
+          <select id="usoNome" class="form-control">
+            <option value="1">Relatório (R)</option>
+            <option value="2">Nome de recém-nascido (N)</option>
+            <option value="3">Nome profissional ou comercial (C)</option>
+            <option value="4">Nome de solteiro (nascimento) (original)</option>
+            <option value="5">Nome registrado (nome legal)</option>
+            <option value="8">Outro nome (alias)</option>
+          </select>
+          <br />
+          <label class="label is-small">Indicador de uso condicional</label>
+          <select id="indicadorUsoCondicional" class="form-control">
+            <option value="1">Informação não confiável </option>
+            <option value="2">Nome com erro de digitação </option>
+            <option value="3">Nome para não ser usado </option>
+            <option value="4">Vínculo do nome proibido por lei </option>
+            <option value="6">Requisito de privacidade/segurança especial </option>
+            <option value="9">Nome temporário </option>
+          </select>
+
+        </form>
+
+        <div id="button-adicionar-nome" type="button" class="btn btn-primary">Adicionar Nome</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableNome">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Uso</th>
+              <th>Preferido</th>
+              <th>Indicador de Uso</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Identificadores</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+          <label class="label is-small">Tipo do identificador</label>
+          <select class="form-control" id="tipoIdentificador">
+            <option value="01">Único dentro da organização</option>
+            <option value="02">Número do prontuário</option>
+            <option value="21">Radiologia</option>
+            <option value="22">Patologia</option>
+            <option value="23">Farmácia</option>
+          </select>
+          <br />
+          <label class="label is-small">Designação</label>
+          <input type="text" class="form-control" id="designacao">
+          <br />
+          <label class="label is-small">Emissor</label>
+          <input type="text" class="form-control" id="emissor">
+          <br />
+          <label class="label is-small">Data</label>
+          <input type="date" class="form-control" id="data">
+          <br />
+          <label class="label is-small">Área Geográfica</label>
+          <select class="form-control" id="areaGeografica">
+            <option value="1">Local</option>
+            <option value="2">Área/região/distrito</option>
+            <option value="3">Estado/província/território</option>
+            <option value="4">Nacional</option>
+          </select>
+
+        </form>
+
+        <div id="button-adicionar-identificador" type="button" class="btn btn-primary">Adicionar Identificador</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableIdentificador">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Designação</th>
+              <th>Emissor</th>
+              <th>Data</th>
+              <th>Área Geográfica</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Certidões</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+          <label class="label is-small">Tipo de Certidão</label>
+          <select class="form-control" id="tipoCertidao">
+            <option value="nascimento">Nascimento</option>
+            <option value="casamento">Casamento</option>
+            <option value="divorcio">Divórcio</option>
+          </select>
+          <br />
+          <label class="label is-small">Nome do Cartório</label>
+          <input type="text" class="form-control" id="nomeCartorio">
+          <br />
+          <label class="label is-small">Livro</label>
+          <input type="number" class="form-control" id="livro">
+          <br />
+          <label class="label is-small">Folha</label>
+          <input type="number" class="form-control" id="folha">
+          <br />
+          <label class="label is-small">Termo</label>
+          <input type="number" class="form-control" id="termo">
+
+        </form>
+
+        <div id="button-adicionar-certidao" type="button" class="btn btn-primary">Adicionar Certidão</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableCertidao">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Cartório</th>
+              <th>Livro</th>
+              <th>Folha</th>
+              <th>Termo</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Carteira de Trabalho</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+
+          <label class="label is-small">Série</label>
+          <input type="number" class="form-control" id="serieCTPS">
+          <br />
+          <label class="label is-small">Estado</label>
+          <select class="form-control" id="estadoCTPS">
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AM">Amazonas</option>
+            <option value="AP">Amapá</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="PR">Paraná</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SE">Sergipe</option>
+            <option value="SP">São Paulo</option>
+            <option value="TO">Tocantins</option>
+          </select>
+
+        </form>
+
+        <div id="button-adicionar-ctps" type="button" class="btn btn-primary">Adicionar Carteira de Trabalho</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableCTPS">
+          <thead>
+            <tr>
+              <th>Série</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Título de Eleitor</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <form name="cadastro-identificador" class="form-group">
+
+          <label class="label is-small">Seção</label>
+          <input type="number" class="form-control" id="secao">
+          <br />
+          <label class="label is-small">Zona</label>
+          <input type="number" class="form-control" id="zona">
+          <br />
+
+        </form>
+
+        <div id="button-adicionar-titulo" type="button" class="btn btn-primary">Adicionar Título de Eleitor</div>
+
+      </div>
+
+      <div class="col-sm-6">
+        <table id="tableTitulo">
+          <thead>
+            <tr>
+              <th>Seção</th>
+              <th>Zona</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="container-fluid">
+    <h2>Dados Demográficos</h2>
+
+    <div>
+      <form id="form-dados-demograficos" class="form-group">
+        <div class="field">
+          <label class="label is-small">Mãe</label>
+          <div class="control">
+            <input class="form-control" class="input" placeholder="nome completo da mãe" type="text" name="nomeMae">
+          </div>
+        </div>
+        <br/>
+        <div class="field">
+          <label class="label is-small">Pai</label>
+          <div class="control">
+            <input class="form-control" class="input" placeholder="nome completo do pai" type="text" name="nomePai">
+          </div>
+        </div>
+        <br/>
+        <div class="field">
+          <label class="label is-small">Situação familiar (convive com)</label>
+          <div class="control">
+            <input class="checkbox" value="1" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;companheiro(a) e filho(s)</span>
+            <br>
+            <input class="checkbox" value="2" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;companheiro(a) com laços conjugais e sem filhos</span>
+            <br>
+            <input class="checkbox" value="3" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;companheiro(a), com filho(s) e/ou outro(s) familiar(es)</span>
+            <br>
+            <input class="checkbox" value="4" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;familiar(es) sem companheiro(a)</span>
+            <br>
+            <input class="checkbox" value="5" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;outra(s) pessoa(s) sem laços consanguíneos e/ou laços conjugais</span>
+            <br>
+            <input class="checkbox" value="6" type="checkbox" name="situacaoFamiliar">
+            <span>&nbsp;vive só</span>
+            <br>
+          </div>
+          <br/>
+          <!-- data de nascimento -->
+          <div class="field">
+            <label class="label is-small">Data de nascimento</label>
+            <input type="date" class="form-control" name="dataNascimento">
+          </div>
+          <br/>
+          <div class="field">
+            <label class="label is-small">Inicador de acurácia</label>
+            <br/>Dia:
+            <label class="radio">
+              <input class="radio" value="A" type="radio" name="nascimentoDia"> Acurado
+            </label>
+            <label class="radio">
+              <input class="radio" value="E" type="radio" name="nascimentoDia"> Estimado
+            </label>
+            <label class="radio">
+              <input class="radio" value="U" type="radio" name="nascimentoDia"> Desconhecido
+            </label>
+            <br> Mês:
+            <label class="radio">
+              <input class="radio" value="A" type="radio" name="nascimentoMes"> Acurado
+            </label>
+            <label class="radio">
+              <input class="radio" value="E" type="radio" name="nascimentoMes"> Estimado
+            </label>
+            <label class="radio">
+              <input class="radio" value="U" type="radio" name="nascimentoMes"> Desconhecido
+            </label>
+            <br> Ano:
+            <label class="radio">
+              <input class="radio" value="A" type="radio" name="nascimentoAno"> Acurado
+            </label>
+            <label class="radio">
+              <input class="radio" value="E" type="radio" name="nascimentoAno"> Estimado
+            </label>
+            <label class="radio">
+              <input class="radio" value="U" type="radio" name="nascimentoAno"> Desconhecido
+            </label>
+          </div>
+          <br/>
+          <div class="field">
+            <label class="label is-small">Seguimento</label>
+            <div class="control">
+              <input class="checkbox" type="checkbox" name="seguimento">&nbsp;Data precisa de seguimento
+            </div>
+          </div>
+          <br/>
+          <!-- óbito -->
+          <div class="field">
+            <label class="label is-small">Óbito</label>
+            <input type="date" class="form-control" name="dataObito">
+          </div>
+          <br/>
+          <div class="field">
+            <fieldset id="fieldsetObitoDia">
+              <label class="label is-small">Inicador de acurácia</label>
+              <br/>Dia:
+              <label class="radio">
+                <input class="radio" value="A" type="radio" name="obitoDia"> Acurado
+              </label>
+              <label class="radio">
+                <input class="radio" value="E" type="radio" name="obitoDia"> Estimado
+              </label>
+              <label class="radio">
+                <input class="radio" value="U" type="radio" name="obitoDia"> Desconhecido
+              </label>
+            </fieldset>
+            <fieldset id="fieldsetObitoMes">
+              Mês:
+              <label class="radio">
+                <input class="radio" value="A" type="radio" name="obitoMes"> Acurado
+              </label>
+              <label class="radio">
+                <input class="radio" value="E" type="radio" name="obitoMes"> Estimado
+              </label>
+              <label class="radio">
+                <input class="radio" value="U" type="radio" name="obitoMes"> Desconhecido
+              </label>
+            </fieldset>
+            <fieldset id="fieldsetObitoAno">
+              Ano:
+              <label class="radio">
+                <input class="radio" value="A" type="radio" name="obitoAno"> Acurado
+              </label>
+              <label class="radio">
+                <input class="radio" value="E" type="radio" name="obitoAno"> Estimado
+              </label>
+              <label class="radio">
+                <input class="radio" value="U" type="radio" name="obitoAno"> Desconhecido
+              </label>
+            </fieldset>
+          </div>
+          <br/>
+          <div class="field">
+            <label class="label is-small">Fonte de notificação</label>
+            <br/>
+            <div class="control">
+              <label class="radio">
+                <input class="radio" value="1" type="radio" name="fonteNotificacao"> Cartório
+              </label>
+              <label class="radio">
+                <input class="radio" value="2" type="radio" name="fonteNotificacao"> Prestador de assistência à saúde</label>
+              <label class="radio">
+                <input class="radio" value="3" type="radio" name="fonteNotificacao"> Parente
+              </label>
+              <label class="radio">
+                <input class="radio" value="4" type="radio" name="fonteNotificacao"> Outro
+              </label>
+              <label class="radio">
+                <input class="radio" value="9" checked="" type="radio" name="fonteNotificacao"> Desconhecido
+              </label>
+            </div>
+          </div>
+          <br/>
+          <div class="field">
+            <label class="label is-small">Raça/cor</label>
+            <div class="control">
+              <input class="checkbox" value="1" type="checkbox" name="raca">
+              <span>&nbsp;branca</span>
+              <br>
+              <input class="checkbox" value="2" type="checkbox" name="raca">
+              <span>&nbsp;preta</span>
+              <br>
+              <input class="checkbox" value="3" type="checkbox" name="raca">
+              <span>&nbsp;parda</span>
+              <br>
+              <input class="checkbox" value="4" type="checkbox" name="raca">
+              <span>&nbsp;amarela</span>
+              <br>
+              <input class="checkbox" value="5" type="checkbox" name="raca">
+              <span>&nbsp;indígena</span>
+            </div>
+          </div>
+          <br/>
+          <div class="field">
+            <label class="label is-small">Sexo</label>
+            <div class="control">
+              <label class="radio">
+                <input class="radio" name="sexo" value="1" type="radio"> masculino (M)
+              </label>
+              <br>
+              <label class="radio">
+                <input class="radio" name="sexo" value="2" type="radio"> feminino (F)
+              </label>
+              <br>
+              <label class="radio">
+                <input class="radio" name="sexo" value="3" type="radio"> intersexo ou indeterminado (I)</label>
+              <br>
+              <label class="radio">
+                <input class="radio" name="sexo" value="9" checked="" type="radio"> não declarado (U)</label>
+            </div>
+          </div>
+          <br/>
+          <!-- situação familiar -->
+          <div class="field">
+            <label class="label is-small">Situação familiar (convive com)</label>
+            <div class="select">
+              <select name="situacaoFamiliar">
+                <option value="1">companheiro(a) e filho(s)</option>
+                <option value="2">companheiro(a) com laços conjugais e sem filhos</option>
+                <option value="3">companheiro(a), com filho(s) e/ou outro(s) familiares.</option>
+                <option value="4">familiar(es) sem companheiro(a)</option>
+                <option value="5">outra(s) pessoa(s), sem laços consanguíneos e/ou laços conjugais</option>
+                <option value="6">Vive só</option>
+              </select>
+            </div>
+          </div>
+          <br/>
+          <!-- nacionalidade -->
+          <label class="label is-small">Nacionalidade</label>
+          <div class="control">
+            <label class="radio">
+              <input id="brasileira" name="nacionalidade" value="1" checked="" type="radio"> Brasileiro
+            </label>
+            <label class="radio">
+              <input name="nacionalidade" value="2" type="radio"> Estrangeiro
+            </label>
+          </div>
+          <br/>
+          <div id="db" style="display: block;">
+            <div class="field">
+              <div class="control">
+                <label class="label is-small">Estado de nascimento</label>
+                <div class="select is-small">
+                  <select id="estados" class="form-control" onchange="atualizaMunicipios()" name="estadoNascimento">
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="PR">Paraná</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="TO">Tocantins</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label id="municipio-label" class="label is-small">Acre (municípios)</label>
+                <div class="select is-small">
+                  <select id="municipios" class="form-control" name="municipioNascimento">
+                    <option value="1200013">Acrelândia</option>
+                    <option value="1200054">Assis Brasil</option>
+                    <option value="1200104">Brasiléia</option>
+                    <option value="1200138">Bujari</option>
+                    <option value="1200179">Capixaba</option>
+                    <option value="1200203">Cruzeiro do Sul</option>
+                    <option value="1200252">Epitaciolândia</option>
+                    <option value="1200302">Feijó</option>
+                    <option value="1200328">Jordão</option>
+                    <option value="1200336">Mâncio Lima</option>
+                    <option value="1200344">Manoel Urbano</option>
+                    <option value="1200351">Marechal Thaumaturgo</option>
+                    <option value="1200385">Plácido de Castro</option>
+                    <option value="1200807">Porto Acre</option>
+                    <option value="1200393">Porto Walter</option>
+                    <option value="1200401">Rio Branco</option>
+                    <option value="1200427">Rodrigues Alves</option>
+                    <option value="1200435">Santa Rosa do Purus</option>
+                    <option value="1200500">Sena Madureira</option>
+                    <option value="1200450">Senador Guiomard</option>
+                    <option value="1200609">Tarauacá</option>
+                    <option value="1200708">Xapuri</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="de" style="display: none;">
+            <div class="field">
+              <div class="control">
+                <label class="label is-small">País de nascimento</label>
+                <div class="select is-small">
+                  <select id="paises" class="form-control" name="paisNascimento">
+                    <option value="101">Afeganistão</option>
+                    <option value="102">África do Sul</option>
+                    <option value="103">Albânia</option>
+                    <option value="104">Alemanha</option>
+                    <option value="105">Andorra</option>
+                    <option value="106">Angola</option>
+                    <option value="107">Anguilla</option>
+                    <option value="108">Antigua e Barbuda</option>
+                    <option value="109">Antilhas Holandesas</option>
+                    <option value="110">Arábia Saudita</option>
+                    <option value="111">Argélia</option>
+                    <option value="112">Argentina</option>
+                    <option value="113">Armênia</option>
+                    <option value="114">Aruba</option>
+                    <option value="115">Austrália</option>
+                    <option value="116">Áustria</option>
+                    <option value="117">Azerbaijão</option>
+                    <option value="118">Bahamas</option>
+                    <option value="119">Bahrein</option>
+                    <option value="120">Bangladesh</option>
+                    <option value="121">Barbados</option>
+                    <option value="122">Bélgica</option>
+                    <option value="123">Belize</option>
+                    <option value="124">Benin</option>
+                    <option value="125">Bermudas</option>
+                    <option value="126">Bielorússia</option>
+                    <option value="127">Bolívia</option>
+                    <option value="128">Bósnia e Herzegóvina</option>
+                    <option value="129">Botswana</option>
+                    <option value="130">Brunei</option>
+                    <option value="131">Bulgária</option>
+                    <option value="132">Burkina Faso</option>
+                    <option value="133">Burundi</option>
+                    <option value="134">Butão</option>
+                    <option value="135">Cabo Verde</option>
+                    <option value="136">Camarões</option>
+                    <option value="137">Camboja</option>
+                    <option value="138">Canadá</option>
+                    <option value="139">Cazaquistão</option>
+                    <option value="140">Chade</option>
+                    <option value="141">Chile</option>
+                    <option value="142">China</option>
+                    <option value="143">Chipre</option>
+                    <option value="144">Cingapura</option>
+                    <option value="145">Colômbia</option>
+                    <option value="146">Coréia do Norte</option>
+                    <option value="147">Coréia do Sul</option>
+                    <option value="148">Costa do Marfim</option>
+                    <option value="149">Costa Rica</option>
+                    <option value="150">Croácia</option>
+                    <option value="151">Cuba</option>
+                    <option value="152">Dinamarca</option>
+                    <option value="153">Djibuti</option>
+                    <option value="154">Dominica</option>
+                    <option value="155">Egito</option>
+                    <option value="156">El Salvador</option>
+                    <option value="157">Emirados Árabes Unidos</option>
+                    <option value="158">Equador</option>
+                    <option value="159">Eritréia</option>
+                    <option value="160">Eslováquia</option>
+                    <option value="161">Eslovênia</option>
+                    <option value="162">Espanha</option>
+                    <option value="163">Estados Unidos</option>
+                    <option value="164">Estônia</option>
+                    <option value="165">Etiópia</option>
+                    <option value="166">Fiji</option>
+                    <option value="167">Filipinas</option>
+                    <option value="168">Finlândia</option>
+                    <option value="169">França</option>
+                    <option value="170">Gabão</option>
+                    <option value="171">Gâmbia</option>
+                    <option value="172">Geórgia</option>
+                    <option value="173">Ghana</option>
+                    <option value="174">Gibraltar</option>
+                    <option value="175">Granada</option>
+                    <option value="176">Grécia</option>
+                    <option value="177">Groenlândia</option>
+                    <option value="178">Guadalupe</option>
+                    <option value="179">Guam</option>
+                    <option value="180">Guatemala</option>
+                    <option value="181">Guiana</option>
+                    <option value="182">Guiana Francesa</option>
+                    <option value="183">Guiné</option>
+                    <option value="184">Guiné Bissau</option>
+                    <option value="185">Guiné Equatorial</option>
+                    <option value="186">Haiti</option>
+                    <option value="187">Holanda</option>
+                    <option value="188">Honduras</option>
+                    <option value="189">Hungria</option>
+                    <option value="190">Iêmen</option>
+                    <option value="191">Ilhas Cayman</option>
+                    <option value="192">Ilhas Comores</option>
+                    <option value="193">Ilhas Cook</option>
+                    <option value="194">Ilhas Falkland (Malvinas)</option>
+                    <option value="195">Ilhas Färoe</option>
+                    <option value="196">Ilhas Marianas</option>
+                    <option value="197">Ilhas Marshall</option>
+                    <option value="198">Ilhas Pitcairn</option>
+                    <option value="199">Ilhas Salomão</option>
+                    <option value="200">Ilhas Turks e Caicos</option>
+                    <option value="201">Ilhas Virgens Americanas</option>
+                    <option value="202">Ilhas Virgens Britânicas</option>
+                    <option value="203">Índia</option>
+                    <option value="204">Indonésia</option>
+                    <option value="205">Irã</option>
+                    <option value="206">Iraque</option>
+                    <option value="207">Irlanda</option>
+                    <option value="208">Islândia</option>
+                    <option value="209">Israel</option>
+                    <option value="210">Itália</option>
+                    <option value="211">Jamaica</option>
+                    <option value="212">Japão</option>
+                    <option value="213">Jordânia</option>
+                    <option value="214">Kirguistão</option>
+                    <option value="215">Kiribati</option>
+                    <option value="216">Kuwait</option>
+                    <option value="217">Laos</option>
+                    <option value="218">Lesotho</option>
+                    <option value="219">Letônia</option>
+                    <option value="220">Líbano</option>
+                    <option value="221">Libéria</option>
+                    <option value="222">Líbia</option>
+                    <option value="223">Liechtenstein</option>
+                    <option value="224">Lituânia</option>
+                    <option value="225">Luxemburgo</option>
+                    <option value="226">Macau</option>
+                    <option value="227">Macedônia</option>
+                    <option value="228">Madagáscar</option>
+                    <option value="229">Malaísia</option>
+                    <option value="230">Malawi</option>
+                    <option value="231">Maldivas</option>
+                    <option value="232">Mali</option>
+                    <option value="233">Malta</option>
+                    <option value="234">Marrocos</option>
+                    <option value="235">Martinica</option>
+                    <option value="236">Maurício</option>
+                    <option value="237">Mauritânia</option>
+                    <option value="238">Mayotte</option>
+                    <option value="239">México</option>
+                    <option value="240">Mianmar</option>
+                    <option value="241">Micronésia</option>
+                    <option value="242">Moçambique</option>
+                    <option value="243">Moldávia</option>
+                    <option value="244">Mônaco</option>
+                    <option value="245">Mongólia</option>
+                    <option value="246">Montserrat</option>
+                    <option value="247">Namíbia</option>
+                    <option value="248">Nauru</option>
+                    <option value="249">Nepal</option>
+                    <option value="250">Nicarágua</option>
+                    <option value="251">Níger</option>
+                    <option value="252">Nigéria</option>
+                    <option value="253">Niue</option>
+                    <option value="254">Noruega</option>
+                    <option value="255">Nova Caledônia</option>
+                    <option value="256">Nova Zelândia</option>
+                    <option value="257">Omã</option>
+                    <option value="258">Palau</option>
+                    <option value="259">Panamá</option>
+                    <option value="260">Papua Nova Guiné</option>
+                    <option value="261">Paquistão</option>
+                    <option value="262">Paraguai</option>
+                    <option value="263">Peru</option>
+                    <option value="264">Polinésia Francesa</option>
+                    <option value="265">Polônia</option>
+                    <option value="266">Porto Rico</option>
+                    <option value="267">Portugal</option>
+                    <option value="268">Qatar</option>
+                    <option value="269">Quênia</option>
+                    <option value="270">Reino Unido (Grã Bretanha e Irlanda do Norte)</option>
+                    <option value="271">República Centro Africana</option>
+                    <option value="272">República Democrática do Congo</option>
+                    <option value="273">República do Congo</option>
+                    <option value="274">República Dominicana</option>
+                    <option value="275">República Tcheca</option>
+                    <option value="276">Reunião</option>
+                    <option value="277">Romênia</option>
+                    <option value="278">Ruanda</option>
+                    <option value="279">Rússia</option>
+                    <option value="280">Saara Ocidental</option>
+                    <option value="281">Saint Pierre e Miquelon</option>
+                    <option value="282">Samoa</option>
+                    <option value="283">Samoa Americana</option>
+                    <option value="284">San Marino</option>
+                    <option value="285">Santa Helena</option>
+                    <option value="286">Santa Lúcia</option>
+                    <option value="287">São Cristóvão e Nevis</option>
+                    <option value="288">São Tomé e Príncipe</option>
+                    <option value="289">São Vicente e Granadinas</option>
+                    <option value="290">Senegal</option>
+                    <option value="291">Serra Leoa</option>
+                    <option value="292">Seychelles</option>
+                    <option value="293">Síria</option>
+                    <option value="294">Somália</option>
+                    <option value="295">Sri Lanka</option>
+                    <option value="296">Suazilândia</option>
+                    <option value="297">Sudão</option>
+                    <option value="298">Suécia</option>
+                    <option value="299">Suíça</option>
+                    <option value="300">Suriname</option>
+                    <option value="301">Tadjiquistão</option>
+                    <option value="302">Tailândia</option>
+                    <option value="303">Taiwan</option>
+                    <option value="304">Tanzânia</option>
+                    <option value="305">Timor Leste</option>
+                    <option value="306">Togo</option>
+                    <option value="307">Tokelau</option>
+                    <option value="308">Tonga</option>
+                    <option value="309">Trinidad e Tobago</option>
+                    <option value="310">Tunísia</option>
+                    <option value="311">Turcomênia</option>
+                    <option value="312">Turquia</option>
+                    <option value="313">Tuvalu</option>
+                    <option value="314">Ucrânia</option>
+                    <option value="315">Uganda</option>
+                    <option value="316">Uruguai</option>
+                    <option value="317">Uzbequistão</option>
+                    <option value="318">Vanuatu</option>
+                    <option value="319">Vaticano</option>
+                    <option value="320">Venezuela</option>
+                    <option value="321">Vietnam</option>
+                    <option value="322">Yugoslavia</option>
+                    <option value="323">Zâmbia</option>
+                    <option value="324">Zimbabwe</option>
+                    <option value="777">APÁTRIDA</option>
+                    <option value="888">OUTRAS NACIONALIDADES</option>
+                    <option value="999">IGNORADO</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label is-small">Data de entrada no Brasil</label>
+              <input type="date" class="form-control" name="dataEntradaBrasil">
+            </div>
+          </div>
+        </div>
+        <br/>
+        <!-- pluralidade de nascimentos -->
+        <div class="field">
+          <div class="control">
+            <label class="label is-small">Pluralidade de nascimentos</label>
+            <div class="select is-small">
+              <select class="form-control" name="pluralidade">
+                <option value="1">Único</option>
+                <option value="2">Gêmeos</option>
+                <option value="3">Trigêmeos</option>
+                <option value="4">Quádruplos</option>
+                <option value="5">Quíntuplos</option>
+                <option value="6">Sêxtuplos</option>
+                <option value="7">Outros</option>
+                <option value="9" selected="">Não declarado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <!-- ordem de nascimento -->
+        <div class="field">
+          <div class="control">
+            <label class="label is-small">Ordem de nascimento</label>
+            <div class="select is-small">
+              <select class="form-control" name="ordemNascimento">
+                <option value="1">único ou primeiro</option>
+                <option value="2">segundo</option>
+                <option value="3">terceiro</option>
+                <option value="4">quarto</option>
+                <option value="5">quinto</option>
+                <option value="6">sexto</option>
+                <option value="7">outros</option>
+                <option value="9" selected="">não declarado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <!-- comentário de identificação -->
+        <div class="field">
+          <div class="control">
+            <label class="label is-small">Comentário de identificação</label>
+            <br/>
+            <textarea style="width:100%; height:60px" name="comentario" class="textarea" placeholder="exemplo: dois pacientes com o mesmo nome. Não é o mesmo que 123456"></textarea>
+          </div>
+        </div>
+      </form>
+      <div id="button-adicionar-dados-demograficos" type="button" class="btn btn-primary">Adicionar Dados Demográficos</div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
