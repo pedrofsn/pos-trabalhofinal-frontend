@@ -6,7 +6,7 @@ $(document).ready(
 
                 idIndividuoEmEdicao = tamanhoLista + 1
                 listaIndividuos.push({
-                    "id": idIndividuoEmEdicao, 'listaNomes': []
+                    "id": idIndividuoEmEdicao, 'listaNomes': [], "listaIdentificadores":[]
                 })
                 exibirConteudo()
             }
