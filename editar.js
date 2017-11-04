@@ -2,7 +2,7 @@ $(document).ready(
     function () {
 
         var listaNomes = [];
-        var rowNomeEmEdicao = -1;
+        var idNomeEmEdicao = -1;
 
         $('#nome, #sobrenome, #titulo, #sufixo').on('input',
             function (e) {
@@ -32,67 +32,108 @@ $(document).ready(
                 var idNomePreferido = $("#nomePreferido").val();
                 var idIndicadorUsoCondicional = $("#indicadorUsoCondicional").val();
 
-                listaNomes.push({
-                    'rotulo': rotulo, 'titulo': titulo, 'nome': nome, 'sobrenome': sobrenome, 'sufixo': sufixo,
-                    'idUsoNome': idUsoNome, 'idNomePreferido': idNomePreferido, 'idIndicadorUsoCondicional': idIndicadorUsoCondicional
-                });
-
                 var index = listaNomes.length;
-                console.log("Adicionou o elemento " + listaNomes[listaNomes.length - 1] + " | Na posição: " + index);
-                console.log("Tamanho da lista: " + listaNomes.length);
+                var isModoEdicao = idNomeEmEdicao != -1;
 
+                // Válido se os campos estão preenchidos corretamente na view
                 if (nome != '' && !nome.includes('Preencha os campos abaixo')) {
 
-                    var html = '<tr>' +
+                    // Se não estiver em modo de edição, ou seja, cadastro.
+                    // Eu incremento o ID
+                    if (!isModoEdicao) {
+                        idNomeEmEdicao = index + 1
+                    }
+
+                    var json = {
+                        'id': idNomeEmEdicao,
+                        'rotulo': rotulo,
+                        'titulo': titulo,
+                        'nome': nome,
+                        'sobrenome': sobrenome,
+                        'sufixo': sufixo,
+                        'idUsoNome': idUsoNome,
+                        'idNomePreferido': idNomePreferido,
+                        'idIndicadorUsoCondicional': idIndicadorUsoCondicional
+                    }
+
+                    // Adiciono o novo objeto no array
+                    listaNomes.push(json);
+
+                    // Se eu estiver editando, eu removo a view com dados antigos
+                    if (isModoEdicao) {
+                        $('#row_nome_' + idNomeEmEdicao).closest('tr').remove();
+                    }
+
+                    // Adiciono a view criada/editada no final da lista (view)
+                    var html = '<tr id="row_nome_' + idNomeEmEdicao + '">' +
                         '<td>' + nome + '</td>' +
                         '<td>' + usoNome + '</td>' +
                         '<td>' + nomePreferido + '</td>' +
                         '<td>' + indicadorUsoCondicional + '</td>' +
-                        '<td><button type="button" id="editar' + index + '">Editar</button></td>' +
-                        '<td><button type="button" id="remover' + index + '">Remover</button></td>' +
+                        '<td><button type="button" id="editar' + idNomeEmEdicao + '">Editar</button></td>' +
+                        '<td><button type="button" id="remover' + idNomeEmEdicao + '">Remover</button></td>' +
                         + '</tr>';
 
                     $('#tableNome').append(html);
                     $('#form-nome').trigger("reset");
 
+                    idNomeEmEdicao = -1
+                } else {
+                    alert('O campo "nome" está vazio')
                 }
             });
 
         $("#tableNome").on("click", "td button", function () {
+            // Obtendo o ID que está anotado na view e o modo de trabalho (edição/remoção)
             var customId = $(this).attr('id');
             var isRemocao = customId.includes('remover')
-            var row = customId.replace("editar", "");
-            row = row.replace("remover", "");
+            var id = customId.replace("editar", "");
+            id = id.replace("remover", "");
 
-            console.log('row clicada: ' + row);
+            console.log('ID da row clicada: ' + id);
 
-            var objeto = listaNomes[row]
-            var index = listaNomes.indexOf(objeto);
+            var index = -1
+            var objeto = null
 
-            if (isRemocao) {
-                // REMOVER
-                console.log('Index encontrado para remoção: ' + row);
-                if (index != -1) {
-                    listaNomes.splice(index, 1);
+            // Procurando o objeto dentro do array
+            for (i = 0; i < listaNomes.length; i++) {
+                var objetoParaEdicao = listaNomes[i]
+
+                if (objetoParaEdicao.id == id) {
+                    index = listaNomes.indexOf(objetoParaEdicao);
+                    objeto = objetoParaEdicao
                 }
+            }
 
-                console.log("Itens na lista (após remoção): " + listaNomes.length);
-                $(this).closest('tr').remove();
-                rowNomeEmEdicao = -1;
-                
-            } else {
-                // EDITAR
-                rowNomeEmEdicao = row - 1;
-                var objetoParaEdicao = listaNomes[row - 1];
+            var isExistente = objeto != null && index > -1
 
-                $('#rotulo').val(objetoParaEdicao.rotulo)
-                $('#titulo').val(objetoParaEdicao.titulo)
-                $('#nome').val(objetoParaEdicao.nome)
-                $('#sobrenome').val(objetoParaEdicao.sobrenome)
-                $('#sufixo').val(objetoParaEdicao.sufixo)
-                $('#usoNome').val(objetoParaEdicao.idUsoNome)
-                $('#nomePreferido').val(objetoParaEdicao.idNomePreferido)
-                $('#indicadorUsoCondicional').val(objetoParaEdicao.idIndicadorUsoCondicional)
+            if (isExistente) {
+                if (isRemocao) {
+                    // REMOVER
+                    // Removendo o objeto da memória
+                    console.log('Index encontrado para remoção: ' + index);
+                    listaNomes.splice(index, 1);
+
+                    // Removendo o objeto da view
+                    console.log("Itens na lista (após remoção): " + listaNomes.length);
+                    $(this).closest('tr').remove();
+
+                    idNomeEmEdicao = -1
+
+                } else {
+                    // EDITAR na view
+                    $('#rotulo').val(objeto.rotulo)
+                    $('#titulo').val(objeto.titulo)
+                    $('#nome').val(objeto.nome)
+                    $('#sobrenome').val(objeto.sobrenome)
+                    $('#sufixo').val(objeto.sufixo)
+                    $('#usoNome').val(objeto.idUsoNome)
+                    $('#nomePreferido').val(objeto.idNomePreferido)
+                    $('#indicadorUsoCondicional').val(objeto.idIndicadorUsoCondicional)
+
+                    // Registrando qual será o id a ser editado ao pressionar o botão salvar
+                    idNomeEmEdicao = objeto.id;
+                }
             }
         });
 
