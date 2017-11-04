@@ -1,36 +1,47 @@
 $(document).ready(
     function () {
         var idNomeEmEdicao = -1;
+        inicializarCadastroEdicaoNomes()
+
+        function inicializarCadastroEdicaoNomes() {
+            idNomeEmEdicao = -1;
+            atualizarLista()
+        }
+        window.inicializarCadastroEdicaoNomes = inicializarCadastroEdicaoNomes
 
         // Atualizo a view
         function atualizarLista() {
-            $('#tableNome').empty()
+            $('#tableNome tbody').empty();
+            $('#form-nome').trigger("reset");
+            $('#rotulo').text('-- Preencha os campos abaixo para visualizar o nome --')
 
             var individuo = getIndividuoParaEdicao()
-            var listaNomes = individuo.listaNomes
+            if (individuo != null) {
+                var listaNomes = individuo.listaNomes
 
-            for (i = 0; i < listaNomes.length; i++) {
-                var objeto = listaNomes[i]
+                for (i = 0; i < listaNomes.length; i++) {
+                    var objeto = listaNomes[i]
 
-                var id = objeto.id
-                var nome = objeto.nome
-                var usoNome = objeto.usoNome
-                var nomePreferido = objeto.nomePreferido
-                var indicadorUsoCondicional = objeto.indicadorUsoCondicional
+                    var id = objeto.id
+                    var rotulo = objeto.rotulo
+                    var usoNome = objeto.usoNome
+                    var nomePreferido = objeto.nomePreferido
+                    var indicadorUsoCondicional = objeto.indicadorUsoCondicional
 
-                var html = '<tr id="row_nome_' + id + '">' +
-                    '<td>' + nome + '</td>' +
-                    '<td>' + usoNome + '</td>' +
-                    '<td>' + nomePreferido + '</td>' +
-                    '<td>' + indicadorUsoCondicional + '</td>' +
-                    '<td><button type="button" id="editar' + id + '">Editar</button></td>' +
-                    '<td><button type="button" id="remover' + id + '">Remover</button></td>' +
-                    + '</tr>';
+                    var html = '<tr id="row_nome_' + id + '">' +
+                        '<td>' + rotulo + '</td>' +
+                        '<td>' + usoNome + '</td>' +
+                        '<td>' + nomePreferido + '</td>' +
+                        '<td>' + indicadorUsoCondicional + '</td>' +
+                        '<td><button type="button" id="editar' + id + '">Editar</button></td>' +
+                        '<td><button type="button" id="remover' + id + '">Remover</button></td>' +
+                        + '</tr>';
 
-                $('#tableNome').append(html);
+                    $('#tableNome').append(html);
+                }
+
+                $('#form-nome').trigger("reset");
             }
-
-            $('#form-nome').trigger("reset");
         }
 
         $('#nome, #sobrenome, #titulo, #sufixo').on('input',
@@ -148,11 +159,9 @@ $(document).ready(
                 if (isRemocao) {
                     // REMOVER
                     // Removendo o objeto da memória
-                    console.log('Index encontrado para remoção: ' + index);
                     listaNomes.splice(index, 1);
 
                     // Removendo o objeto da view
-                    console.log("Itens na lista (após remoção): " + listaNomes.length);
                     $(this).closest('tr').remove();
 
                     idNomeEmEdicao = -1

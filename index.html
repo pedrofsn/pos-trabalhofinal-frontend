@@ -12,15 +12,16 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/editar.css">
 
-  <!-- variáveis globais -->
   <script>
+    // VARIÁVEIS GLOBAIS
     var isListaAberta = true
 
     var idIndividuoEmEdicao = -1
     var indexIndividuoEmEdicao = -1
     var individuoEmEdicao = null
 
-    var listaIndividuos = [{ 'id': 1, 'listaNomes': [] }];
+    //var listaIndividuos = [{ 'id': 1, 'listaNomes': [] }];
+    var listaIndividuos = [];
 
     function getIndividuoParaEdicao() {
       if (idIndividuoEmEdicao != -1) {
@@ -44,6 +45,7 @@
   <script src="js/editar.js"></script>
   <script src="js/roteamento.js"></script>
   <script src="js/controller_nome.js"></script>
+  <script src="js/controller_forms.js"></script>
   <script src="js/controller_lista.js"></script>
   <script src="js/controller_navbar.js"></script>
   <script src="js/editar_dados_demograficos.js"></script>
@@ -152,6 +154,7 @@
                 <th>Uso</th>
                 <th>Preferido</th>
                 <th>Indicador de Uso</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
