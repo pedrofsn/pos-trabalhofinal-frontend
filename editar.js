@@ -2,6 +2,7 @@ $(document).ready(
     function () {
 
         var listaNomes = [];
+        var rowNomeEmEdicao = -1;
 
         $('#nome, #sobrenome, #titulo, #sufixo').on('input',
             function (e) {
@@ -17,12 +18,25 @@ $(document).ready(
 
         $('#button-adicionar-nome').click(
             function () {
-                var nome = $('#rotulo').text();
+                var titulo = $('#titulo').val();
+                var nome = $('#nome').val();
+                var sobrenome = $('#sobrenome').val();
+                var sufixo = $('#sufixo').val();
+                var rotulo = titulo + " " + nome + " " + sobrenome + " " + sufixo;
+
                 var usoNome = $("#usoNome option:selected").text();
                 var nomePreferido = $("#nomePreferido option:selected").text();
                 var indicadorUsoCondicional = $("#indicadorUsoCondicional option:selected").text();
 
-                listaNomes.push({ 'usoNome': usoNome, 'nome': nome });
+                var idUsoNome = $("#usoNome").val();
+                var idNomePreferido = $("#nomePreferido").val();
+                var idIndicadorUsoCondicional = $("#indicadorUsoCondicional").val();
+
+                listaNomes.push({
+                    'rotulo': rotulo, 'titulo': titulo, 'nome': nome, 'sobrenome': sobrenome, 'sufixo': sufixo,
+                    'idUsoNome': idUsoNome, 'idNomePreferido': idNomePreferido, 'idIndicadorUsoCondicional': idIndicadorUsoCondicional
+                });
+
                 var index = listaNomes.length;
                 console.log("Adicionou o elemento " + listaNomes[listaNomes.length - 1] + " | Na posição: " + index);
                 console.log("Tamanho da lista: " + listaNomes.length);
@@ -34,29 +48,52 @@ $(document).ready(
                         '<td>' + usoNome + '</td>' +
                         '<td>' + nomePreferido + '</td>' +
                         '<td>' + indicadorUsoCondicional + '</td>' +
-                        '<td><button type="button" id="' + index + '">teste</button></td>' +
+                        '<td><button type="button" id="editar' + index + '">Editar</button></td>' +
+                        '<td><button type="button" id="remover' + index + '">Remover</button></td>' +
                         + '</tr>';
 
                     $('#tableNome').append(html);
+                    $('#form-nome').trigger("reset");
 
                 }
             });
 
-        $("#tableNome").on("click", "td button", function () {            
-            var row = $(this).attr('id');
-            var elemento = listaNomes[row]
+        $("#tableNome").on("click", "td button", function () {
+            var customId = $(this).attr('id');
+            var isRemocao = customId.includes('remover')
+            var row = customId.replace("editar", "");
+            row = row.replace("remover", "");
 
             console.log('row clicada: ' + row);
 
-            var index = listaNomes.indexOf(elemento);
-            console.log('index encontrado para remoção: ' + row);
-            if(index != -1) {
-                listaNomes.splice(index, 1);
+            var objeto = listaNomes[row]
+            var index = listaNomes.indexOf(objeto);
+
+            if (isRemocao) {
+                // REMOVER
+                console.log('Index encontrado para remoção: ' + row);
+                if (index != -1) {
+                    listaNomes.splice(index, 1);
+                }
+
+                console.log("Itens na lista (após remoção): " + listaNomes.length);
+                $(this).closest('tr').remove();
+                rowNomeEmEdicao = -1;
+                
+            } else {
+                // EDITAR
+                rowNomeEmEdicao = row - 1;
+                var objetoParaEdicao = listaNomes[row - 1];
+
+                $('#rotulo').val(objetoParaEdicao.rotulo)
+                $('#titulo').val(objetoParaEdicao.titulo)
+                $('#nome').val(objetoParaEdicao.nome)
+                $('#sobrenome').val(objetoParaEdicao.sobrenome)
+                $('#sufixo').val(objetoParaEdicao.sufixo)
+                $('#usoNome').val(objetoParaEdicao.idUsoNome)
+                $('#nomePreferido').val(objetoParaEdicao.idNomePreferido)
+                $('#indicadorUsoCondicional').val(objetoParaEdicao.idIndicadorUsoCondicional)
             }
-
-            console.log("Itens na lista (após remoção): " + listaNomes.length)
-
-            $(this).closest('tr').remove();
         });
 
         $('#button-adicionar-identificador').click(
