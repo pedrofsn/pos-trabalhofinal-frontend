@@ -33,7 +33,7 @@ function atualizaMunicipios() {
             }
         }
     };
-    xhttp.open("GET", "js/municipios.json", true);
+    xhttp.open("GET", "json/municipios.json", true);
     xhttp.send();
 }
 
@@ -59,6 +59,6 @@ function paises(chave) {
             }
         }
     };
-    xhttp.open("GET", "js/paises.json", true);
+    xhttp.open("GET", "json/paises.json", true);
     xhttp.send();
 }

@@ -1,6 +1,5 @@
 $(document).ready(
     function () {
-        var isListaAberta
         exibirLista()
 
         function exibirLista() {
@@ -9,6 +8,7 @@ $(document).ready(
             atualizarListaIndividuos()
             isListaAberta = true
         }
+        window.exibirLista = exibirLista
 
         function exibirConteudo() {
             $('#lista').hide()
@@ -19,13 +19,12 @@ $(document).ready(
         function atualizarListaIndividuos() {
             $('#lista-individuos').empty()
 
-            console.log(listaIndividuos)
             for (i = 0; i < listaIndividuos.length; i++) {
                 var obj = listaIndividuos[i]
                 var id = obj.id
                 var nome = ""
 
-                if(obj.listaNomes[0] != null) {
+                if (obj.listaNomes[0] != null) {
                     nome = obj.listaNomes[0].nome
                 }
 
@@ -42,17 +41,5 @@ $(document).ready(
                 });
             }
         }
-
-        $('#atalho-lista').click(
-            function () {
-                if (!isListaAberta) {
-                    if (confirm("Tem certeza que deseja sair/cancelar do cadastro atual?")) {
-                        exibirLista()
-                    }
-                } else {
-                    exibirLista()
-                }
-            }
-        )
     }
 );
